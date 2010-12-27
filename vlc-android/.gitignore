@@ -1,0 +1,7 @@
+bin/
+gen/
+jni/Android.mk
+jni/libvlcjni.h
+libs/
+obj/
+
