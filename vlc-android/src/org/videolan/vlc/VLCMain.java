@@ -4,32 +4,35 @@ import org.videolan.vlc.R;
 
 import android.app.Activity;
 import android.os.Bundle;
-
 import android.widget.Button;
-import android.view.SurfaceView;
 import android.view.View;
 
-public class VLCMain extends Activity {
-    /** Called when the activity is first created. */
+public class VLCMain extends Activity
+{
+	private VLCView m_view;
+    private LibVLC m_libVLC;
+    
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
+        // tell system to use the layout defined in our XML file
         setContentView(R.layout.main);
+        m_libVLC = new LibVLC();
 
         final Button button = (Button)findViewById(R.id.button);
-        final SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surface_view);
         
-        libvlc = new LibVLC();
-        
-        surfaceView.getHolder().addCallback(new SurfaceCallback(libvlc));
+        m_view = (VLCView)findViewById(R.id.vlc_view);
+        m_view.setBackend(m_libVLC);
 
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	libvlc.Init();
-            	libvlc.readMedia("/sdcard/test.mp4");
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+            	//Make sure surface is set before calling this...
+            	m_libVLC.Init();
+            	m_libVLC.readMedia("/sdcard/test.mp4");
             }
         });
     }
-
-    LibVLC libvlc;
 }

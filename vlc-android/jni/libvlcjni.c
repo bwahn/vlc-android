@@ -12,7 +12,6 @@
 // Native android window to display the video.
 ANativeWindow *p_nativeWindow;
 
-
 void Java_org_videolan_vlc_LibVLC_setSurface(JNIEnv *env, jobject thiz, jobject surface)
 {
     p_nativeWindow = ANativeWindow_fromSurface(env, surface);
@@ -36,8 +35,8 @@ void Java_org_videolan_vlc_LibVLC_destroy(JNIEnv *env, jobject thiz, jint instan
     libvlc_release(p_instance);
 }
 
-void Java_org_videolan_vlc_LibVLC_readMedia(JNIEnv *env, jobject thiz, jint instance,
-                                       jstring mrl)
+void Java_org_videolan_vlc_LibVLC_readMedia(JNIEnv *env, jobject thiz,
+		jint instance, jstring mrl)
 {
     jboolean isCopy;
     const char *psz_mrl = (*env)->GetStringUTFChars(env, mrl, &isCopy);
