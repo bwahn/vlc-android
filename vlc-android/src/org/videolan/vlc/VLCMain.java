@@ -4,8 +4,9 @@ import org.videolan.vlc.R;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 public class VLCMain extends Activity
 {
@@ -24,14 +25,17 @@ public class VLCMain extends Activity
         
         m_view = (VLCView)findViewById(R.id.vlc_view);
         m_view.setBackend(m_libVLC);
+        
+		Log.v("VLC", "Created, loading LibVLC.");
 
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
             	//Make sure surface is set before calling this...
-            	m_libVLC.Init();
-            	m_libVLC.readMedia("/sdcard/test.mp4");
+            	if( !m_libVLC.Init() )
+            		Log.e("VLC", "Unable to init libvlc");
+            	m_libVLC.readMedia("/sdcard/test.mpg");
             }
         });
     }

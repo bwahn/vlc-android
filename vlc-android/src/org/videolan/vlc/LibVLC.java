@@ -63,7 +63,7 @@ public class LibVLC
 
     /**
     * Initialize the libVLC class
-    * @return true if the libVLC C library was created correctly, false overwise
+    * @return true if the libVLC C library was created correctly, false otherwise
     */
     public boolean Init()
     {
